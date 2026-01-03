@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser")
 const authRouter = require("./routes/auth")
 const cors = require("cors");
+const { errorHandler } = require("./middlewares/error")
 
 
 
@@ -13,6 +14,8 @@ app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
+app.use(errorHandler);
+
 
 const startServer = async () => {
     await connectDB();
